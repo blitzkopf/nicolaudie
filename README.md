@@ -10,7 +10,7 @@
 [![Discord][discord-shield]][discord]
 [![Community Forum][forum-shield]][forum]
 
-_Integration to integrate with [nicolaudie][nicolaudie] devices.
+_Integration to integrate with [nicolaudie][nicolaudie] devices._
 
 **This integration will set up the following platforms.**
 

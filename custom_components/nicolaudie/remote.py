@@ -71,4 +71,4 @@ class NicolaudieRemote(NicolaudieEntity, RemoteEntity):
     @property
     def activity_list(self):
         """Return the list of activities."""
-        return self.coordinator.controller.scenes.values().list()
+        return list(self.coordinator.controller.scenes.values())

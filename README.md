@@ -5,7 +5,6 @@
 [![License][license-shield]](LICENSE)
 
 ![Project Maintenance][maintenance-shield]
-[![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
 
 [![Discord][discord-shield]][discord]
 [![Community Forum][forum-shield]][forum]
@@ -47,5 +46,6 @@ If you want to contribute to this please read the [Contribution guidelines](CONT
 [forum-shield]: https://img.shields.io/badge/community-forum-brightgreen.svg?style=for-the-badge
 [forum]: https://community.home-assistant.io/
 [license-shield]: https://img.shields.io/github/license/blitzkopf/nicolaudie.svg?style=for-the-badge
-[maintenance-shield]: https://img.shields.io/badge/maintainer-Joakim%20Sørensen%20%40ludeeus-blue.svg?style=for-the-badge
+[maintenance-shield]: https://img.shields.io/badge/maintainer-Yngvi%20Þór%20Sigurjónsson%20%40blitzkopf-blue.svg?style=for-the-badge
 [releases]: https://github.com/blitzkopf/nicolaudie/releases
+[releases-shield]: https://img.shields.io/github/release/blitzkopf/nicolaudie.svg?style=for-the-badge

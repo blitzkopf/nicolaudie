@@ -10,7 +10,7 @@ from .entity import NicolaudieEntity
 
 
 async def async_setup_entry(hass, entry, async_add_devices):
-    """Setup remote platform."""
+    """Set up remote platform."""
     coordinator = hass.data[DOMAIN][entry.entry_id]
     # ents = []
     # for zone_id,name in coordinator.controller.zones.items():
@@ -26,6 +26,7 @@ async def async_setup_entry(hass, entry, async_add_devices):
 
 class NicolaudieRemote(NicolaudieEntity, RemoteEntity):
     """nicolaudie remote class."""
+
     _attr_supported_features: RemoteEntityFeature = RemoteEntityFeature.ACTIVITY
 
     def __init__(
@@ -70,6 +71,4 @@ class NicolaudieRemote(NicolaudieEntity, RemoteEntity):
     @property
     def activity_list(self):
         """Return the list of activities."""
-        # for some reason HA is not happy values() straight from the dict
-        list = [ sc for sc  in self.coordinator.controller.scenes.values() ]
-        return list
+        return self.coordinator.controller.scenes.values().list()

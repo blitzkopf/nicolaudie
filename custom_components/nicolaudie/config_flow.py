@@ -5,8 +5,6 @@ import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.core import callback
 from homeassistant.const import CONF_HOST
-from homeassistant.helpers import selector
-from homeassistant.helpers.aiohttp_client import async_create_clientsession
 
 from .const import DOMAIN, LOGGER, PLATFORMS
 
@@ -25,7 +23,7 @@ class NicolaudieFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         _errors = {}
         if user_input is not None:
             try:
-                info = await self._validate_connection(user_input[CONF_HOST])
+                _info = await self._validate_connection(user_input[CONF_HOST])
             # except CannotConnect:
             #     _errors["base"] = "cannot_connect"
             # except InvalidAuth:
@@ -50,6 +48,7 @@ class NicolaudieFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
     @staticmethod
     @callback
     def async_get_options_flow(config_entry):
+        """Get the options flow for this handler."""
         return NicolaudieOptionsFlowHandler(config_entry)
 
     async def _validate_connection(self, host):

@@ -18,3 +18,6 @@ SCENE = "scene"
 PLATFORMS = [REMOTE,
              #SCENE
             ]
+
+# Configuration and options
+CONF_NEED_AUTHENTICATION = "need_authentication"

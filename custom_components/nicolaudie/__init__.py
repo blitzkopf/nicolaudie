@@ -24,7 +24,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     passwd = entry.data.get(CONF_PASSWORD) if entry.data.get(CONF_NEED_AUTHENTICATION) else None
     controller=Controller(
         address=entry.data[CONF_HOST], # TODO deal with host vs address
-        password=entry.data[CONF_PASSWORD]
+        password=passwd
     )
     await controller.start()
     await controller.initialize()

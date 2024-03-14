@@ -4,9 +4,9 @@ from __future__ import annotations
 import voluptuous as vol
 from homeassistant import config_entries
 from homeassistant.core import callback
-from homeassistant.const import CONF_HOST
+from homeassistant.const import CONF_HOST, CONF_PASSWORD
 
-from .const import DOMAIN, LOGGER, PLATFORMS
+from .const import DOMAIN, LOGGER, PLATFORMS, CONF_NEED_AUTHENTICATION
 
 class NicolaudieFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
     """Config flow for Nicolaudie."""
@@ -23,7 +23,8 @@ class NicolaudieFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         _errors = {}
         if user_input is not None:
             try:
-                _info = await self._validate_connection(user_input[CONF_HOST])
+                _info = await self._validate_connection(user_input[CONF_HOST],user_input[CONF_NEED_AUTHENTICATION],
+                                                        user_input[CONF_PASSWORD])
             # except CannotConnect:
             #     _errors["base"] = "cannot_connect"
             # except InvalidAuth:
@@ -39,7 +40,9 @@ class NicolaudieFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_show_form(
             step_id="user",
             data_schema=vol.Schema(
-                {vol.Required(CONF_HOST): str}
+                {vol.Required(CONF_HOST): str,
+                    vol.Required(CONF_NEED_AUTHENTICATION): bool,
+                 vol.Optional(CONF_PASSWORD): str}
             ),
             errors=_errors,
         )
@@ -51,7 +54,7 @@ class NicolaudieFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         """Get the options flow for this handler."""
         return NicolaudieOptionsFlowHandler(config_entry)
 
-    async def _validate_connection(self, host):
+    async def _validate_connection(self, host,need_authentication,password):
         """Return true if credentials is valid."""
         try:
             # TODO: test connection to the host and see if it is a Stick 3

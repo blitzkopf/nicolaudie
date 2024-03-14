@@ -6,10 +6,10 @@ https://github.com/ludeeus/nicolaudie
 from __future__ import annotations
 
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import CONF_HOST, Platform
+from homeassistant.const import CONF_HOST,CONF_PASSWORD, Platform
 from homeassistant.core import HomeAssistant
 
-from .const import DOMAIN
+from .const import DOMAIN, CONF_NEED_AUTHENTICATION
 from .coordinator import NicolaudieUpdateCoordinator
 from nicostick import Controller
 
@@ -21,14 +21,16 @@ PLATFORMS: list[Platform] = [
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up this integration using UI."""
     hass.data.setdefault(DOMAIN, {})
+    passwd = entry.data.get(CONF_PASSWORD) if entry.data.get(CONF_NEED_AUTHENTICATION) else None
     controller=Controller(
-            address=entry.data[CONF_HOST], # TODO deal with host vs address
-        )
+        address=entry.data[CONF_HOST], # TODO deal with host vs address
+        password=entry.data[CONF_PASSWORD]
+    )
     await controller.start()
     await controller.initialize()
     hass.data[DOMAIN][entry.entry_id] = coordinator = NicolaudieUpdateCoordinator(
         hass=hass,
-         controller=controller
+        controller=controller
     )
     # https://developers.home-assistant.io/docs/integration_fetching_data#coordinated-single-api-poll-for-data-for-all-entities
     await coordinator.async_config_entry_first_refresh()
@@ -44,7 +46,6 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     if unloaded := await hass.config_entries.async_unload_platforms(entry, PLATFORMS):
         hass.data[DOMAIN].pop(entry.entry_id)
     return unloaded
-
 
 async def async_reload_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
     """Reload config entry."""

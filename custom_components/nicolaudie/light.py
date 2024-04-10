@@ -29,7 +29,7 @@ class NicolaudieLight(NicolaudieEntity, LightEntity):
     """nicolaudie light class."""
 
     _attr_supported_features: LightEntityFeature = LightEntityFeature.EFFECT
-    _attr_supported_color_modes = set([ColorMode.ONOFF, ColorMode.RGB,ColorMode.WHITE])
+    _attr_supported_color_modes = {ColorMode.ONOFF, ColorMode.RGB,ColorMode.WHITE}
     _attr_color_mode = None
 
     def __init__(

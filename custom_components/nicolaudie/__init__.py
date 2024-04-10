@@ -6,7 +6,7 @@ https://github.com/blitzkopf/nicolaudie
 from __future__ import annotations
 
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import CONF_HOST,CONF_PASSWORD, Platform
+from homeassistant.const import CONF_HOST,CONF_PASSWORD
 from homeassistant.core import HomeAssistant
 
 from .const import DOMAIN, CONF_NEED_AUTHENTICATION,PLATFORMS

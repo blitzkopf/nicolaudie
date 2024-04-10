@@ -1,5 +1,7 @@
 """Constants for nicolaudie."""
 from logging import Logger, getLogger
+from homeassistant.const import Platform
+
 
 LOGGER: Logger = getLogger(__package__)
 
@@ -13,11 +15,11 @@ ISSUE_URL = "https://github.com/blitzkopf/nicolaudie/issues"
 ICON = "mdi:ipod"
 
 # Platforms
-REMOTE = "remote"
-SCENE = "scene"
-PLATFORMS = [REMOTE,
-             #SCENE
-            ]
+PLATFORMS: list[Platform] = [
+    Platform.REMOTE,
+    Platform.LIGHT,
+    #Platform.SCENE
+]
 
 # Configuration and options
 CONF_NEED_AUTHENTICATION = "need_authentication"

@@ -16,6 +16,7 @@ _Integration to integrate with [nicolaudie][nicolaudie] devices._
 Platform | Description
 -- | --
 `remote` | Switch on/off and change scenes on Nicolaudie devices.
+`light`  | Control brightness and color on device.
 
 ## Installation
 
